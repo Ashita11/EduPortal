@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            /* box-sizing: border-box; */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            width: 100%;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #35424a;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-right: #e8491d 3px solid;
+        }
+
+        .sidebar ul {
+            padding-top: 20px;
+        }
+
+        .sidebar ul li {
+            list-style: none;
+            text-align: left;
+            font-size: large;
+            padding-top: 10px;
+        }
+
+        #pro {
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            background-color: #cccccc;
+        }
+
+        #offcanvasExample {
+            width: 230px;
+            background-color: #35424a;
+            color: white;
+        }
+
+        .sidebar2 {
+            align-items: center;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 20px;
+        }
+
+        .sidebar .option-box {
+            background: #35424a;
+            color: #ffffff;
+            margin: 20px 0;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .sidebar .option-box:hover {
+            background: #e8491d;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        header {
+            background: #35424a;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: #e8491d 3px solid;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .options {
+            display: flex;
+            /* flex-wrap: wrap; */
+            flex-direction: row;
+            margin-top: 20px;
+            width: inherit;
+        }
+
+        .options div {
+            display: flex;
+            width: 50%;
+            /* overflow:scroll; */
+        }
+
+        .option-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #35424a;
+            color: #ffffff;
+            height: 9vh;
+            min-height: 90px;
+            margin: 10px;
+            min-width: 150px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option-box:hover {
+            /* width: 180px; */
+            /* height: 100px; */
+            font-size: 20px;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: row;
+            padding: 20px;
+            justify-content: space-around;
+            /* background: #ffffff; */
+            margin-top: 20px;
+            border-radius: 5px;
+            height: 400px;
+            align-items: center;
+        }
+
+        .main div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            box-shadow: 0px 0px 20px 0px #cccccc;
+            width: 50%;
+            padding: 20px;
+            height: inherit;
+        }
+
+        canvas {
+            height: inherit;
+        }
+
+        /* .main h2 {
+            margin-bottom: 20px;
+        }
+
+        .main section {
+            margin-bottom: 20px;
+        } */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #dddddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+        }
+
+        footer {
+            bottom: 0px;
+            background: #35424a;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            border-top: #e8491d 3px solid;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin-bottom: 5px;
+        }
+
+        form input,
+        form textarea {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            padding: 10px;
+            background-color: #35424a;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #e8491d;
+        }
+
+        .aa {
+            text-decoration: none;
+            color: white;
+            font-size: 25px;
+        }
+
+        header a {
+            display: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        #attend {
+            display: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container2 {
+            margin: 20px;
+        }
+
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .attendance-table th,
+        .attendance-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .attendance-table th {
+            background-color: #f2f2f2;
+        }
+
+        .present {
+            background-color: green;
+            color: white;
+        }
+
+        .absent {
+            background-color: red;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container2 div {
+            text-align: center;
+            font-size: large;
+        }
+
+        select {
+            text-align: center;
+            font-size: medium;
+        }
+
+        #chartjs-pie {
+            height: 300px;
+            width: 300px;
+        }
+
+        #chartjs-bar {
+            height: 400px;
+            width: 100%;
+        }
+
+        #profile{
+            display: none;
+        }
+
+        @media screen and (max-width:1000px) {
+
+            .container {
+                width: inherit;
+                max-width: inherit;
+                margin: 0;
+            }
+
+            .main {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .main div {
+                box-shadow: 0px 0px 20px 0px #cccccc;
+                width: 100%;
+                padding: 50px;
+                height: inherit;
+            }
+
+            #chartjs.bar{
+                height: 200px;
+            }
+
+            canvas {
+                height: inherit;
+            }
+
+            .options {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .options div {
+                display: flex;
+                width: 100%;
+            }
+
+            .option-box {
+                width: 200px;
+            }
+
+            header a {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width:850px) {
+            .container {
+                width: inherit;
+                max-width: 200px;
+                max-width: inherit;
+                margin: 0;
+            }
+
+            .main{
+                height: 800px;
+            }
+
+            .main div {
+                box-shadow: 0px 0px 20px 0px #cccccc;
+                width: 100vw;
+                padding: 50px;
+                height: inherit;
+            }
+            #chartjs.bar{
+                height: 500px;
+            }
+
+            canvas {
+                height: inherit;
+            }
+
+            .main {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .option-box {
+                min-height: 100px;
+                font-size: x-large;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            header a {
+                display: flex;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h3>{{stu.uname}}</h3>
+            <div id="pro"></div>
+            <ul>
+                <li>Profile</li>
+                <li>Attendance</li>
+                <li>Fees</li>
+                <li>Result</li>
+                <li>Leave Application</li>
+                <li>Logout</li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <header>
+                <a class="aa" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+                    aria-controls="offcanvasExample" id="menu-icon">
+                    ☰
+                </a>
+                <h1>EduPortal</h1>
+            </header>
+
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+                aria-labelledby="offcanvasExampleLabel">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="sidebar2">
+                    <h2>Ashita</h2>
+                </div>
+            </div>
+            <div class="options">
+                <div>
+                    <div class="option-box" style="background-color: rgb(67, 192, 255);"
+                        onclick="profile()">
+                        View Profile
+                    </div>
+                    <div class="option-box" style="background-color: rgb(255, 153, 81);"><a
+                            onclick="displayAttendance()">View Attendance</a></div>
+                </div>
+                <div>
+                    <div class="option-box" style="background-color: rgb(4, 152, 4);" onclick="showSection('result')">
+                        View Result</div>
+                    <div class="option-box" style="background-color: rgb(251, 56, 56);"
+                        onclick="showSection('courses')">View Courses</div>
+                </div>
+
+            </div>
+
+            <div class="main">
+                <div><canvas id="chartjs-pie"></canvas></div>
+                <div><canvas id="chartjs-bar"></canvas></div>
+            </div>
+            <div class="main">
+                <div>
+                    <h2>Info at a glance</h2>
+                    <table>
+                        <tr>
+                            <th>Total Classes</th>
+                            <td>{{total}}</td>
+                        </tr>
+                        <tr>
+                            <th>Present</th>
+                            <td>{{p}}</td>
+                        </tr>
+                        <tr>
+                            <th>Absent</th>
+                            <td>{{a}}</td>
+                        </tr>
+                        <tr>
+                            <th>Percentage</th>
+                            <td>{{per}}%</td>
+                        </tr>
+                    </table>
+                </div>
+                <div></div>
+            </div>
+            <main id="attend">
+                <h1>Attendance</h1>
+                <div>
+                    <label for="subject">Select Subject: </label>
+                    <select id="subject" onchange="displayAttendance()">
+                    </select>
+                </div>
+
+                <table class="attendance-table" id="attendance-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendance-body">
+                    </tbody>
+                </table>
+                <button class="btn btn-primary" onclick="back()">Back</button>
+            </main>
+            <main id="profile">
+                <h1>Profile</h1>
+                <div>
+                    <table>
+                        <tr>
+                            <th><label for="name">Name:</label></th>
+                            <td><input type="text" value="{{stu.uname}}" readonly></td><br>
+                        </tr>
+                        <tr>
+                            <th><label for="email">Email:</label></th>
+                            <td><input type="email" value="{{stu.uemail}}" readonly></td><br>
+                        </tr>
+                        <tr>
+                            <th><label for="Roll">Roll Number:</label></th>
+                            <td><input type="text" value="{{stu.uroll}}" readonly></td><br>
+                        </tr>
+                        <tr>
+                            <th><label for="num">Mobile:</label></th>
+                            <td><input type="tel" value="{{stu.umob}}" readonly></td><br>
+                        </tr>
+                    </table>
+                </div>
+ 
+                <!-- <table class="attendance-table" id="attendance-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendance-body">
+                    </tbody>
+                </table> -->
+                <button class="btn btn-primary" onclick="back()">Back</button>
+            </main>
+        </div>
+    </div>
+
+
+    <script>
+
+        const pr = {{ p }};
+        const ab = {{ a }};
+        const att_a = {{ att_a| safe}};
+        const att_p = {{ att_p| safe}};
+        const sub = {{ sub| safe}};
+
+        console.log(ab, pr)
+        new Chart(document.getElementById("chartjs-pie"), {
+            type: "pie",
+            data: {
+                labels: ["Present", "Absent"],
+                datasets: [{
+                    data: [pr, ab],
+                    backgroundColor: [
+                        '#28a745',
+                        'red'
+                    ],
+                    borderColor: "transparent"
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                cutoutPercentage: 65,
+            }
+        });
+
+        new Chart(document.getElementById("chartjs-bar"), {
+            type: "bar",
+            data: {
+                labels: sub,
+                datasets: [{
+                    label: "Present",
+                    backgroundColor: '#007bff',
+                    borderColor: '#007bff',
+                    hoverBackgroundColor: '#007bff',
+                    hoverBorderColor: '#007bff',
+                    data: att_p,
+                    barPercentage: .75,
+                    categoryPercentage: .5
+                }, {
+                    label: "Absent",
+                    backgroundColor: "#dee2e6",
+                    borderColor: "#dee2e6",
+                    hoverBackgroundColor: "#dee2e6",
+                    hoverBorderColor: "#dee2e6",
+                    data: att_a,
+                    barPercentage: .75,
+                    categoryPercentage: .5
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        gridLines: {
+                            display: false
+                        },
+                        stacked: false
+                    }],
+                    xAxes: [{
+                        stacked: false,
+                        gridLines: {
+                            color: "transparent"
+                        }
+                    }]
+                }
+            }
+        });
+
+        function logout() {
+            alert('You have been logged out.');
+            // Add logout functionality here, such as redirecting to a login page
+        }
+
+        const attendData = JSON.parse('{{ attendData|escapejs }}');
+        console.log(attendData);
+
+
+        const subjectSelect = document.getElementById('subject');
+        Object.keys(attendData).forEach(subject => {
+            const option = document.createElement('option');
+            option.value = subject;
+            option.textContent = subject;
+            subjectSelect.appendChild(option);
+        });
+
+        function profile(){
+            document.getElementById('profile').style.display = "block"
+            document.getElementById('attend').style.display = "none"
+            let mainElements = document.getElementsByClassName('main');
+            for (let i = 0; i < mainElements.length; i++) {
+                mainElements[i].style.display = "none";
+            }
+        }
+
+        function displayAttendance() {
+            document.getElementById('attend').style.display = "block"
+            document.getElementById('profile').style.display = "none"
+            let mainElements = document.getElementsByClassName('main');
+            for (let i = 0; i < mainElements.length; i++) {
+                mainElements[i].style.display = "none";
+            }
+            const subject = document.getElementById('subject').value;
+            const attendanceBody = document.getElementById('attendance-body');
+            attendanceBody.innerHTML = ''; // Clear previous data
+
+            if (attendData[subject]) {
+                const records = attendData[subject];
+                for (const [date, status] of Object.entries(records)) {
+                    const row = document.createElement('tr');
+                    const dateCell = document.createElement('td');
+                    const statusCell = document.createElement('td');
+
+                    dateCell.textContent = date;
+                    statusCell.textContent = status;
+
+                    if (status === 'Present') {
+                        statusCell.classList.add('present');
+                    } else {
+                        statusCell.classList.add('absent');
+                    }
+
+                    row.appendChild(dateCell);
+                    row.appendChild(statusCell);
+                    attendanceBody.appendChild(row);
+                }
+            }
+        }
+
+        function back() {
+            document.getElementById('attend').style.display = "none"
+            document.getElementById('profile').style.display = "none"
+            let mainElements = document.getElementsByClassName('main');
+            for (let i = 0; i < mainElements.length; i++) {
+                mainElements[i].style.display = "block";
+            }
+        }
+
+        // Initialize with the first subject's attendance
+        // window.onload = () => {
+        //     displayAttendance();
+        // };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!--define a project user model containing use name,user email,user password as its fields.
+    Design a signup page for registering new project user.Design a login page with which an existing user can login-->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    body{
+        background-image: url("https://lh5.googleusercontent.com/p/AF1QipPe8FtPTpJ5gtO8ZvNxPBnmD6JCMAsqTsUCF5-c=w1080-k-no");
+        background-size: cover;
+    }
+    content{
+        display: inline-block;
+        width: 1000px;
+        height: 500px;
+        position: fixed;
+        top: 15%;
+        left: 15%;
+        background-color: rgba(128, 128, 128, 0.80);
+        border-radius: 30px;
+        /*opacity: 0.6;*/
+    }
+    .cc{
+        position: fixed;
+        top: 30%;
+        left: 55%;
+    }
+    input{
+        width: 300px;
+        height: 40px;
+        border: 2px solid black;
+        border-radius: 10px;
+        box-shadow: 8px 8px 8px black;
+    }
+    .input{
+        width: 300px;
+        height: 40px;
+        border: 2px solid black;
+        border-radius: 10px;
+        box-shadow: 8px 8px 8px black;
+        /*.input:hover{
+            background-color: black;
+        }*/
+
+    }
+    .input:hover {
+            background-color: gray;
+            color: white;
+            outline: none;
+        }
+    .c1{
+        display: inline-block;
+        position: relative;
+        top: 5%;
+        left: 2.5%;
+        width: 45%;
+        height: 90%;
+        background-image: url("https://www.united.ac.in/ucer/assets/images/about-ugi.jpg");
+        background-size: cover;
+        opacity: 0.8;
+        border-radius: 30px;
+    }
+    a{
+        display: inline-block; 
+        width: 150px;
+        height: 25px;
+        font-size: 20px;
+        text-decoration: none;
+        text-align: center;
+        color: black;
+        border: black;
+        border-radius: 15px;
+        vertical-align: middle;
+    }
+    /*a:hover{
+        background: linear-gradient(to right, rgb(237, 79, 79) , rgba(62, 61, 61, 0.827));
+        color: white;
+    }*/
+    .c2{
+        display: inline-block;
+        width: 150px;
+        height: 25px;
+        position: relative;
+        /* top: 60%; */
+        bottom: 8%;
+        left: 69%;
+        /* text-align: center; */
+        border: 2px solid black;
+        border-radius: 15px;
+    }
+    #ii{
+        font-size: large;
+        font-style: italic;
+    }
+    /*.C3{
+        display: inline-block;
+        width: 20px;
+        height: 100px;
+        background-image: url("https://www.admissioncounselor.in/im/college/logo/united-college-of-engineering-and-research-_-allahabad-paryagraj-(allahabad).png");
+    }*/
+</style>
+</head>
+<body>
+    <content>
+        <div class="c1"></div>
+    <div class="cc">
+    <form method="post" action="check">
+        {% csrf_token %}
+        <div>
+            <label><b>EMAIL</b></label><br>
+            <input type="email" placeholder="Enter your email" name="em" id='v2' required><br><br>
+        </div>
+        <div>
+            <label><b>PASSWORD</b></label><br>
+            <input type="password" placeholder="Enter password" name="pswd" id='v1' required><br><br><br>
+        </div>
+        <input class='input' type="submit">
+    </form><br><br>
+    <strong id="ii">-----------------------  OR  ---------------------</strong>
+    
+    
+    </div><br>
+    <div class="c2"><a href="signup" onmouseover="this.style.backgroundColor='black';this.style.color='white'"
+        onmouseout="this.style.backgroundColor='transparent';this.style.color='inherit'">NEW USER</a></div>
+    </content>
+</body>
+</html>
